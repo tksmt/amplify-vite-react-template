@@ -12,6 +12,15 @@ const schema = a.schema({
       content: a.string(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
+  event: a
+    .model({
+      event_id: a.string(),
+      event_flag: a.boolean(),
+      createtime: a.datetime(),
+      devicelist: a.string().array(),
+      status: a.enum(['DRAFT', 'PUBLISHED', 'ARCHIVED'])
+    })
+    .authorization((allow) => [allow.publicApiKey()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
